@@ -15,11 +15,10 @@ public class RootConfig {
     @Bean
     public DataSource dataSource() {
         BasicDataSource dataSource = new BasicDataSource();
-        dataSource.setDriverClassName("org.h2.Driver");
-        dataSource.setUrl("jdbc:mysql:~/spring-jpa;DATABASE_TO_UPPER=false;MODE=LEGACY;"
-                + "INIT=RUNSCRIPT FROM 'classpath:/script/schema.sql'");
-        dataSource.setUsername("sa");
-        dataSource.setPassword("");
+        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        dataSource.setUrl("jdbc:mysql://133.186.241.167:3306/nhn_academy_39");
+        dataSource.setUsername("nhn_academy_39");
+        dataSource.setPassword("*6]fBj1*QmPlpH2c");
 
         dataSource.setInitialSize(10);
         dataSource.setMaxTotal(10);

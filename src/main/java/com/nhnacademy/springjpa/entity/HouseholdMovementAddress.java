@@ -1,12 +1,11 @@
 package com.nhnacademy.springjpa.entity;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
@@ -43,7 +42,7 @@ public class HouseholdMovementAddress {
     @Embeddable
     public static class Pk implements Serializable {
         @Column(name = "house_movement_report_date")
-        private LocalDateTime houseMovementReportDate;
+        private LocalDate houseMovementReportDate;
 
         private Integer householdSerialNumber;
     }

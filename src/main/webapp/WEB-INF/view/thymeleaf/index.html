@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>정부 24</title>
+</head>
+<body>
+    <div th:each="resident : ${residents}">
+        <span th:text="${resident.name}"></span>
+        <a th:href="'/resident-register/' + ${resident.residentSerialNumber}">주민등록등본</a>
+    </div>
+
+    <div style="margin-top: 50px; height: 100%; display:flex; align-items: center; justify-content: center">
+        <th:block th:each="pageNumber : ${#numbers.sequence(1, totalPage)}">
+            <a th:href="@{'?page=' + ${pageNumber - 1}}" style="margin-right: 5px" th:text="${pageNumber}"></a>
+        </th:block>
+    </div>
+</body>
+</html>

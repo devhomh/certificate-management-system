@@ -34,7 +34,7 @@ create table birth_death_report_resident
    death_report_qualifications_code varchar(20) null,
    email_address                    varchar(50) null,
    phone_number                     varchar(20) not null,
-   primary key (birth_report_qualifications_code, resident_serial_number, birth_death_type_code)
+   primary key (birth_death_type_code, report_resident_serial_number, resident_serial_number)
 );
 
 create table family_relationship
@@ -97,8 +97,8 @@ commit;
 
 
 -- 4. birth_death_report_resident 테이블 데이터 추가
-insert into birth_death_report_resident values (7, '출생', 4, '20120317', '부', null, 'nam@nhnad.co.kr', '010-1234-5678');
-insert into birth_death_report_resident values (1, '사망', 2, '20200502', '비동거친족', null, null, '010-2345-6789');
+insert into birth_death_report_resident values ('출생', 4, 7, '20120317', '부', null, 'nam@nhnad.co.kr', '010-1234-5678');
+insert into birth_death_report_resident values ('사망', 2, 1, '20200502', '비동거친족', null, null, '010-2345-6789');
 
 commit;
 

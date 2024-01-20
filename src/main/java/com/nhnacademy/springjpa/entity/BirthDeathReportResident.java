@@ -1,12 +1,11 @@
 package com.nhnacademy.springjpa.entity;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
@@ -31,7 +30,7 @@ public class BirthDeathReportResident {
     private Resident resident;
 
     @Column(name = "birth_death_report_date")
-    private LocalDateTime birthDeathReportDate;
+    private LocalDate birthDeathReportDate;
 
     @Column(name = "birth_report_qualifications_code")
     private String birthReportQualificationsCode;

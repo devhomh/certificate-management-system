@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        table {
+            width: 80%;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        th {
+           background-color: rgba(128, 128, 128, 0.3)
+        }
+
+        th, td {
+            border: 1px solid black;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>주민등록등본</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>발급일</th>
+            <th>증명서확인번호</th>
+            <th>세대주 성명</th>
+            <th>세대구성사유</th>
+            <th>일자</th>
+        </tr>
+        </thead>
+        <tbody>
+            <td th:text="${certificate.certificateIssueDate}"></td>
+            <td th:text="${certificate.certificateConfirmationNumber}"></td>
+            <td th:text="${headOfHousehold.name}"></td>
+            <td th:text="${headOfHousehold.householdCompositionChangeReasonCode}"></td>
+            <td th:text="${headOfHousehold.reportDate}"></td>
+        </tbody>
+    </table>
+
+    <table>
+        <thead>
+        <tr>
+            <th colspan="2">주소</th>
+            <th>신고일</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="addressInfo : ${addressInfoList}">
+            <td th:text="${addressInfo.lastAddressYn == 'Y' ? '현주소' : '전주소'}"></td>
+            <td th:text="${addressInfo.houseMovementAddress}"></td>
+            <td th:text="${addressInfo.pk.houseMovementReportDate}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <table>
+        <thead>
+        <tr>
+            <th>관계 코드</th>
+            <th>이름</th>
+            <th>주민등록번호</th>
+            <th>신고일</th>
+            <th>변경 사유 코드</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="composition : ${compositionList}">
+            <td th:text="${composition.householdRelationshipCode}"></td>
+            <td th:text="${composition.name}"></td>
+            <td th:text="${composition.residentRegistrationNumber}"></td>
+            <td th:text="${composition.reportDate}"></td>
+            <td th:text="${composition.householdCompositionChangeReasonCode}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>

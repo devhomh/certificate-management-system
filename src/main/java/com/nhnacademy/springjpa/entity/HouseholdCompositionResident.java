@@ -1,7 +1,7 @@
 package com.nhnacademy.springjpa.entity;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
@@ -35,7 +35,7 @@ public class HouseholdCompositionResident {
     private Resident resident;
 
     @Column(name = "report_date")
-    private LocalDateTime reportDate;
+    private LocalDate reportDate;
 
     @Column(name = "household_relationship_code")
     private String householdRelationshipCode;

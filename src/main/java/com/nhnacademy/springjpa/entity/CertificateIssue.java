@@ -1,6 +1,6 @@
 package com.nhnacademy.springjpa.entity;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -28,5 +28,5 @@ public class CertificateIssue {
     private String certificateTypeCode;
 
     @Column(name = "certificate_issue_date")
-    private LocalDateTime certificateIssueDate;
+    private LocalDate certificateIssueDate;
 }

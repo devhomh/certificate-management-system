@@ -1,6 +1,6 @@
 package com.nhnacademy.springjpa.entity;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,7 +27,7 @@ public class Household {
     private Resident resident;
 
     @Column(name = "household_composition_date")
-    private LocalDateTime householdCompositionDate;
+    private LocalDate householdCompositionDate;
 
     @Column(name = "household_composition_reason_code")
     private String householdCompositionReasonCode;
