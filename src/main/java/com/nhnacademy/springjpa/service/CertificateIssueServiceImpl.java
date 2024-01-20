@@ -4,7 +4,6 @@ import com.nhnacademy.springjpa.entity.CertificateIssue;
 import com.nhnacademy.springjpa.entity.Resident;
 import com.nhnacademy.springjpa.repository.CertificateIssueRepository;
 import java.time.LocalDate;
-import java.util.Optional;
 import java.util.Random;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;

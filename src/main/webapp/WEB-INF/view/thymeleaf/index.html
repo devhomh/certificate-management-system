@@ -8,6 +8,7 @@
     <div th:each="resident : ${residents}">
         <span th:text="${resident.name}"></span>
         <a th:href="'/resident-register/' + ${resident.residentSerialNumber}">주민등록등본</a>
+        <a th:href="'/family-relationship/' + ${resident.residentSerialNumber}">가족관계증명서</a>
     </div>
 
     <div style="margin-top: 50px; height: 100%; display:flex; align-items: center; justify-content: center">
