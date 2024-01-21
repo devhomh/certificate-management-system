@@ -1,70 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title th:text="${own.name} + ' | 사망신고서'"></title>
-    <style>
-        .tg  {border-collapse:collapse;border-spacing:0;}
-        .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-            overflow:hidden;padding:10px 5px;word-break:normal;}
-        .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-            font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
-        .tg .tg-34fe{background-color:#c0c0c0;border-color:inherit;text-align:center;vertical-align:top}
-        .tg .tg-baqh{text-align:center;vertical-align:top}
-        .tg .tg-z99a{background-color:#9b9b9b;border-color:inherit;color:#ffffff;text-align:center;vertical-align:top}
-        .tg .tg-3xi5{background-color:#ffffff;border-color:inherit;text-align:center;vertical-align:top}
-        .tg .tg-i81m{background-color:#ffffff;text-align:center;vertical-align:top}
-    </style>
-</head>
-<body>
-    <table class="tg">
-        <thead>
-            <tr>
-                <th class="tg-z99a" colspan="6">
-                    <div>사망신고서</div>
-                    <div th:text="'(신고일 : ' + ${info.birthDeathReportDate} + ')'"></div>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="tg-34fe" rowspan="4">사망자</td>
-                <td class="tg-34fe" colspan="2">성명</td>
-                <td class="tg-3xi5" th:text="${own.name}"></td>
-                <td class="tg-34fe">주민등록번호</td>
-                <td class="tg-baqh" th:text="${own.residentRegistrationNumber}"></td>
-            </tr>
-            <tr>
-                <td class="tg-34fe" colspan="2">사망일시</td>
-                <td class="tg-3xi5" colspan="3" th:text="${own.deathDate}"></td>
-            </tr>
-            <tr>
-                <td class="tg-34fe" rowspan="2">사망장소</td>
-                <td class="tg-34fe">구분</td>
-                <td class="tg-3xi5" colspan="3" th:text="${own.deathPlaceCode}"></td>
-            </tr>
-            <tr>
-                <td class="tg-34fe">주소</td>
-                <td class="tg-3xi5" colspan="3" th:text="${own.deathPlaceAddress}"></td>
-            </tr>
-            <tr>
-                <td class="tg-34fe" rowspan="3">신고인</td>
-                <td class="tg-34fe" colspan="2">성명</td>
-                <td class="tg-3xi5" th:text="${registrant.name}"></td>
-                <td class="tg-34fe">주민등록번호</td>
-                <td class="tg-i81m" th:text="${registrant.residentRegistrationNumber}"></td>
-            </tr>
-            <tr>
-                <td class="tg-34fe" colspan="2">자격</td>
-                <td class="tg-3xi5" colspan="3" th:text="${info.birthReportQualificationsCode}"></td>
-            </tr>
-            <tr>
-                <td class="tg-34fe" colspan="2">이메일</td>
-                <td class="tg-3xi5" th:text="${info.emailAddress}"></td>
-                <td class="tg-34fe">전화번호</td>
-                <td class="tg-i81m" th:text="${info.phoneNumber}"></td>
-            </tr>
-        </tbody>
-    </table>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title th:text="${own.name} + ' | 사망신고서'"></title>
+        <style>
+            body {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .tg  {border-collapse:collapse;border-spacing:0;}
+            .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+                overflow:hidden;padding:10px 5px;word-break:normal;}
+            .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+                font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+            .tg .tg-34fe{background-color:#c0c0c0;border-color:inherit;text-align:center;vertical-align:center}
+            .tg .tg-baqh{text-align:center;vertical-align:top}
+            .tg .tg-z99a{background-color:#9b9b9b;border-color:inherit;color:#ffffff;text-align:center;vertical-align:center}
+            .tg .tg-3xi5{background-color:#ffffff;border-color:inherit;text-align:center;vertical-align:center}
+            .tg .tg-i81m{background-color:#ffffff;text-align:center;vertical-align:center}
+        </style>
+    </head>
+    <body>
+        <table class="tg" style="width: 50%;">
+            <thead>
+                <tr>
+                    <th class="tg-z99a" colspan="6">
+                        <div>사망신고서</div>
+                        <div th:text="'(신고일 : ' + ${info.birthDeathReportDate} + ')'"></div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="tg-34fe" rowspan="4">사망자</td>
+                    <td class="tg-34fe" colspan="2">성명</td>
+                    <td class="tg-3xi5" th:text="${own.name}"></td>
+                    <td class="tg-34fe">주민등록번호</td>
+                    <td class="tg-baqh" th:text="${own.residentRegistrationNumber}"></td>
+                </tr>
+                <tr>
+                    <td class="tg-34fe" colspan="2">사망일시</td>
+                    <td class="tg-3xi5" colspan="3" th:text="${own.deathDate}"></td>
+                </tr>
+                <tr>
+                    <td class="tg-34fe" rowspan="2">사망장소</td>
+                    <td class="tg-34fe">구분</td>
+                    <td class="tg-3xi5" colspan="3" th:text="${own.deathPlaceCode}"></td>
+                </tr>
+                <tr>
+                    <td class="tg-34fe">주소</td>
+                    <td class="tg-3xi5" colspan="3" th:text="${own.deathPlaceAddress}"></td>
+                </tr>
+                <tr>
+                    <td class="tg-34fe" rowspan="3">신고인</td>
+                    <td class="tg-34fe" colspan="2">성명</td>
+                    <td class="tg-3xi5" th:text="${registrant.name}"></td>
+                    <td class="tg-34fe">주민등록번호</td>
+                    <td class="tg-i81m" th:text="${registrant.residentRegistrationNumber}"></td>
+                </tr>
+                <tr>
+                    <td class="tg-34fe" colspan="2">자격</td>
+                    <td class="tg-3xi5" colspan="3" th:text="${info.birthReportQualificationsCode}"></td>
+                </tr>
+                <tr>
+                    <td class="tg-34fe" colspan="2">이메일</td>
+                    <td class="tg-3xi5" th:text="${info.emailAddress}"></td>
+                    <td class="tg-34fe">전화번호</td>
+                    <td class="tg-i81m" th:text="${info.phoneNumber}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
 </html>

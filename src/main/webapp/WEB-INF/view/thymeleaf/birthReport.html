@@ -1,92 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title th:text="${own.name} + ' | 출생신고서'"></title>
-    <style>
-        body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .tg  {border-collapse:collapse;border-spacing:0;}
-        .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-            overflow:hidden;padding:10px 5px;word-break:normal;}
-        .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-            font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
-        .tg .tg-llyw{background-color:#c0c0c0;border-color:inherit;text-align:center;vertical-align:top}
-        .tg .tg-0pky{border-color:inherit;text-align:center;vertical-align:top}
-        .tg .tg-z99a{background-color:#9b9b9b;border-color:inherit;text-align:center;vertical-align:top}
-    </style>
-</head>
-<body>
-    <table class="tg">
-        <thead>
-        <tr>
-            <th class="tg-z99a" colspan="5">
-                <div>출생신고서</div>
-                <div th:text="'(신고일 : ' + ${info.birthDeathReportDate} + ')'"></div>
-            </th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td class="tg-llyw" rowspan="4">출생자</td>
-            <td class="tg-llyw">성명</td>
-            <td class="tg-0pky" th:text="${own.name}"></td>
-            <td class="tg-llyw">성별</td>
-            <td class="tg-0pky" th:text="${own.genderCode}"></td>
-        </tr>
-        <tr>
-            <td class="tg-llyw">출생일시</td>
-            <td class="tg-0pky" colspan="3" th:text="${own.birthDate}"></td>
-        </tr>
-        <tr>
-            <td class="tg-llyw">출생장소</td>
-            <td class="tg-0pky" colspan="3" th:text="${own.birthPlaceCode}"></td>
-        </tr>
-        <tr>
-            <td class="tg-llyw">등록기준지 (본적)</td>
-            <td class="tg-0pky" colspan="3" th:text="${currentAddress}"></td>
-        </tr>
-        <th:block th:each="person : ${parentInfo}">
-            <th:block th:if="${person.familyRelationshipCode} == '부'">
+    <head>
+        <meta charset="UTF-8">
+        <title th:text="${own.name} + ' | 출생신고서'"></title>
+        <style>
+            body {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .tg  {border-collapse:collapse;border-spacing:0;}
+            .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+                overflow:hidden;padding:10px 5px;word-break:normal;}
+            .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+                font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+            .tg .tg-llyw{background-color:#c0c0c0;border-color:inherit;text-align:center;vertical-align:center}
+            .tg .tg-0pky{border-color:inherit;text-align:center;vertical-align:center}
+            .tg .tg-z99a{background-color:#9b9b9b;border-color:inherit;text-align:center;vertical-align:center}
+        </style>
+    </head>
+    <body>
+        <table class="tg" style="width: 50%;">
+            <thead>
                 <tr>
-                    <td class="tg-llyw">부</td>
-                    <td class="tg-llyw">성명</td>
-                    <td class="tg-0pky" th:text="${person.resident.name}"></td>
-                    <td class="tg-llyw">주민등록번호</td>
-                    <td class="tg-0pky" th:text="${person.resident.residentRegistrationNumber}"></td>
+                    <th class="tg-z99a" colspan="5">
+                        <div>출생신고서</div>
+                        <div th:text="'(신고일 : ' + ${info.birthDeathReportDate} + ')'"></div>
+                    </th>
                 </tr>
-            </th:block>
-            <th:block th:if="${person.familyRelationshipCode} == '모'">
+            </thead>
+            <tbody>
                 <tr>
-                    <td class="tg-llyw">모</td>
+                    <td class="tg-llyw" rowspan="4">출생자</td>
                     <td class="tg-llyw">성명</td>
-                    <td class="tg-0pky" th:text="${person.resident.name}"></td>
-                    <td class="tg-llyw">주민등록번호</td>
-                    <td class="tg-0pky" th:text="${person.resident.residentRegistrationNumber}"></td>
+                    <td class="tg-0pky" th:text="${own.name}"></td>
+                    <td class="tg-llyw">성별</td>
+                    <td class="tg-0pky" th:text="${own.genderCode}"></td>
                 </tr>
-            </th:block>
-        </th:block>
-        <tr>
-            <td class="tg-llyw" rowspan="3">신고인</td>
-            <td class="tg-llyw">성명</td>
-            <td class="tg-0pky" th:text="${registrant.name}"></td>
-            <td class="tg-llyw">주민등록번호</td>
-            <td class="tg-0pky" th:text="${registrant.residentRegistrationNumber}"></td>
-        </tr>
-        <tr>
-            <td class="tg-llyw">자격</td>
-            <td class="tg-0pky" colspan="3" th:text="${info.birthReportQualificationsCode}"></td>
-        </tr>
-        <tr>
-            <td class="tg-llyw">이메일</td>
-            <td class="tg-0pky" th:text="${info.emailAddress}"></td>
-            <td class="tg-llyw">전화번호</td>
-            <td class="tg-0pky" th:text="${info.phoneNumber}"></td>
-        </tr>
-        </tbody>
-    </table>
-</body>
+                <tr>
+                    <td class="tg-llyw">출생일시</td>
+                    <td class="tg-0pky" colspan="3" th:text="${own.birthDate}"></td>
+                </tr>
+                <tr>
+                    <td class="tg-llyw">출생장소</td>
+                    <td class="tg-0pky" colspan="3" th:text="${own.birthPlaceCode}"></td>
+                </tr>
+                <tr>
+                    <td class="tg-llyw">등록기준지 (본적)</td>
+                    <td class="tg-0pky" colspan="3" th:text="${currentAddress}"></td>
+                </tr>
+                <th:block th:each="person : ${parentInfo}">
+                    <th:block th:if="${person.familyRelationshipCode} == '부'">
+                        <tr>
+                            <td class="tg-llyw">부</td>
+                            <td class="tg-llyw">성명</td>
+                            <td class="tg-0pky" th:text="${person.resident.name}"></td>
+                            <td class="tg-llyw">주민등록번호</td>
+                            <td class="tg-0pky" th:text="${person.resident.residentRegistrationNumber}"></td>
+                        </tr>
+                    </th:block>
+                    <th:block th:if="${person.familyRelationshipCode} == '모'">
+                        <tr>
+                            <td class="tg-llyw">모</td>
+                            <td class="tg-llyw">성명</td>
+                            <td class="tg-0pky" th:text="${person.resident.name}"></td>
+                            <td class="tg-llyw">주민등록번호</td>
+                            <td class="tg-0pky" th:text="${person.resident.residentRegistrationNumber}"></td>
+                        </tr>
+                    </th:block>
+                </th:block>
+                <tr>
+                    <td class="tg-llyw" rowspan="3">신고인</td>
+                    <td class="tg-llyw">성명</td>
+                    <td class="tg-0pky" th:text="${registrant.name}"></td>
+                    <td class="tg-llyw">주민등록번호</td>
+                    <td class="tg-0pky" th:text="${registrant.residentRegistrationNumber}"></td>
+                </tr>
+                <tr>
+                    <td class="tg-llyw">자격</td>
+                    <td class="tg-0pky" colspan="3" th:text="${info.birthReportQualificationsCode}"></td>
+                </tr>
+                <tr>
+                    <td class="tg-llyw">이메일</td>
+                    <td class="tg-0pky" th:text="${info.emailAddress}"></td>
+                    <td class="tg-llyw">전화번호</td>
+                    <td class="tg-0pky" th:text="${info.phoneNumber}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
 </html>
