@@ -98,7 +98,7 @@ commit;
 
 -- 4. birth_death_report_resident 테이블 데이터 추가
 insert into birth_death_report_resident values ('출생', 4, 7, '20120317', '부', null, 'nam@nhnad.co.kr', '010-1234-5678');
-insert into birth_death_report_resident values ('사망', 2, 1, '20200502', '비동거친족', null, null, '010-2345-6789');
+insert into birth_death_report_resident values ('사망', 2, 1, '20200502', null, '비동거친족', null, '010-2345-6789');
 
 commit;
 

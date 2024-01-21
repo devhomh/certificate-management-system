@@ -1,6 +1,6 @@
 package com.nhnacademy.springjpa.entity;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,7 +30,7 @@ public class Resident {
     private String genderCode;
 
     @Column(name = "birth_date")
-    private LocalDate birthDate;
+    private LocalDateTime birthDate;
 
     @Column(name = "birth_place_code")
     private String birthPlaceCode;
@@ -39,7 +39,7 @@ public class Resident {
     private String registrationBaseAddress;
 
     @Column(name = "death_date")
-    private LocalDate deathDate;
+    private LocalDateTime deathDate;
 
     @Column(name = "death_place_code")
     private String deathPlaceCode;

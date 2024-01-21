@@ -1,11 +1,11 @@
 package com.nhnacademy.springjpa.service;
 
 import com.nhnacademy.springjpa.domain.HouseholdCompositionResidentDto;
+import com.nhnacademy.springjpa.domain.RegistrantDto;
 import com.nhnacademy.springjpa.domain.ResidentDto;
 import com.nhnacademy.springjpa.entity.Resident;
 import com.nhnacademy.springjpa.exception.ResidentNotFoundException;
 import com.nhnacademy.springjpa.repository.HouseholdCompositionResidentRepository;
-import com.nhnacademy.springjpa.repository.HouseholdRepository;
 import com.nhnacademy.springjpa.repository.ResidentRepository;
 import java.util.List;
 import javax.transaction.Transactional;
@@ -39,6 +39,7 @@ public class ResidentServiceImpl implements ResidentService{
     }
 
     @Transactional
+    @Override
     public Resident getResident(int serialNum){
         return residentRepository.findById(serialNum)
                 .orElseThrow(ResidentNotFoundException::new);
@@ -66,5 +67,11 @@ public class ResidentServiceImpl implements ResidentService{
                 .filter(resident -> resident.getHouseholdCompositionChangeReasonCode().equals("세대분리"))
                 .findFirst()
                 .orElseThrow();
+    }
+
+    @Transactional
+    @Override
+    public RegistrantDto findRegistrant(int serialNum) {
+        return residentRepository.findRegistrant(serialNum);
     }
 }

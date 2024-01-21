@@ -9,5 +9,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface ResidentRepository extends JpaRepository<Resident, Integer>, ResidentRepositoryCustom {
     Integer findResidentSerialNumberByName(String name);
     Page<ResidentDto> getAllBy(Pageable pageable);
-
 }

@@ -1,6 +1,7 @@
 package com.nhnacademy.springjpa.service;
 
 import com.nhnacademy.springjpa.domain.HouseholdCompositionResidentDto;
+import com.nhnacademy.springjpa.domain.RegistrantDto;
 import com.nhnacademy.springjpa.domain.ResidentDto;
 import com.nhnacademy.springjpa.entity.Resident;
 import java.util.List;
@@ -13,4 +14,6 @@ public interface ResidentService {
     List<HouseholdCompositionResidentDto> getHouseholdCompositionResident(int serialNum);
 
     HouseholdCompositionResidentDto getHeadOfHousehold(int serialNum);
+
+    RegistrantDto findRegistrant(int serialNum);
 }

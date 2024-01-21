@@ -1,6 +1,6 @@
 package com.nhnacademy.springjpa.domain;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,6 +19,6 @@ public class FamilyRelationshipCertificateDto {
         String name;
         String residentRegistrationNumber;
         String genderCode;
-        LocalDate birthDate;
+        LocalDateTime birthDate;
     }
 }

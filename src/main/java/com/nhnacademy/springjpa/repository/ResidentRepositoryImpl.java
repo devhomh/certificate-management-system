@@ -1,6 +1,8 @@
 package com.nhnacademy.springjpa.repository;
 
 import com.nhnacademy.springjpa.domain.HouseholdCompositionResidentDto;
+import com.nhnacademy.springjpa.domain.RegistrantDto;
+import com.nhnacademy.springjpa.entity.QBirthDeathReportResident;
 import com.nhnacademy.springjpa.entity.QHousehold;
 import com.nhnacademy.springjpa.entity.QHouseholdCompositionResident;
 import com.nhnacademy.springjpa.entity.QResident;
@@ -34,5 +36,23 @@ public class ResidentRepositoryImpl extends QuerydslRepositorySupport implements
                 .where(household.householdSerialNumber.eq(householdSerialNumber))
                 .fetchJoin()
                 .fetch();
+    }
+
+    @Override
+    public RegistrantDto findRegistrant(int serialNum) {
+        QResident resident = QResident.resident;
+        QBirthDeathReportResident report = QBirthDeathReportResident.birthDeathReportResident;
+        return from(resident)
+                .select(Projections.constructor(RegistrantDto.class,
+                        resident.name,
+                        resident.residentRegistrationNumber))
+                .innerJoin(report)
+                .on(resident.residentSerialNumber.eq(report.pk.reportResidentSerialNumber))
+                .where(report.pk.residentSerialNumber.eq(serialNum))
+                .fetchJoin()
+                .fetch()
+                .stream()
+                .findFirst()
+                .orElseThrow();
     }
 }

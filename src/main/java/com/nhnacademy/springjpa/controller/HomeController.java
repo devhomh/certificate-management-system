@@ -1,9 +1,7 @@
 package com.nhnacademy.springjpa.controller;
 
-import com.nhnacademy.springjpa.domain.HouseholdCompositionResidentDto;
 import com.nhnacademy.springjpa.domain.ResidentDto;
 import com.nhnacademy.springjpa.service.ResidentServiceImpl;
-import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
