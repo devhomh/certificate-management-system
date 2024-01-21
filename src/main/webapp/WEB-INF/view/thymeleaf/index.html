@@ -45,16 +45,24 @@
                 <tr>
                     <td th:text="${resident.name}"></td>
                     <td>
-                        <a th:href="'/resident-register/' + ${resident.residentSerialNumber}">주민등록등본</a>
+                        <th:block th:if="${resident.residentRegister}">
+                            <a th:href="'/resident-register/' + ${resident.residentSerialNumber}">주민등록등본</a>
+                        </th:block>
                     </td>
                     <td>
-                        <a th:href="'/family-relationship/' + ${resident.residentSerialNumber}">가족관계증명서</a>
+                        <th:block th:if="${resident.familyRelationship}">
+                            <a th:href="'/family-relationship/' + ${resident.residentSerialNumber}">가족관계증명서</a>
+                        </th:block>
                     </td>
                     <td>
-                        <a th:href="'/birth-report/' + ${resident.residentSerialNumber}">출생신고</a>
+                        <th:block th:if="${resident.birthReport}">
+                            <a th:href="'/birth-report/' + ${resident.residentSerialNumber}">출생신고</a>
+                        </th:block>
                     </td>
                     <td>
-                        <a th:href="'/death-report/' + ${resident.residentSerialNumber}">사망신고서</a>
+                        <th:block th:if="${resident.deathReport}">
+                            <a th:href="'/death-report/' + ${resident.residentSerialNumber}">사망신고서</a>
+                        </th:block>
                     </td>
                     <td></td>
                     <td>
