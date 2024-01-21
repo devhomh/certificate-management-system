@@ -9,7 +9,8 @@
         <span th:text="${resident.name}"></span>
         <a th:href="'/resident-register/' + ${resident.residentSerialNumber}">주민등록등본</a>
         <a th:href="'/family-relationship/' + ${resident.residentSerialNumber}">가족관계증명서</a>
-        <a th:href="'/birth-report/' + ${resident.residentSerialNumber}">출생신고서</a>
+        <a th:href="'/birth-report/' + ${resident.residentSerialNumber}">출생신고</a>
+        <a th:href="'/death-report/' + ${resident.residentSerialNumber}">사망신고서</a>
     </div>
 
     <div style="margin-top: 50px; height: 100%; display:flex; align-items: center; justify-content: center">

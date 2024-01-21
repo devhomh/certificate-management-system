@@ -97,9 +97,6 @@ public class CertificateController {
                 birthDeathReportResidentService.findReport(serialNum, "출생");
         modelMap.addAttribute("info", info);
 
-        List<FamilyRelationshipCertificateDto> parentInfo =
-                familyRelationshipService.getFamilyRelationship(serialNum);
-        modelMap.addAttribute("parentInfo", parentInfo);
 
         Resident own = residentService.getResident(serialNum);
         modelMap.addAttribute("own", own);
@@ -110,8 +107,27 @@ public class CertificateController {
         RegistrantDto registrant = residentService.findRegistrant(serialNum);
         modelMap.addAttribute("registrant", registrant);
 
+        List<FamilyRelationshipCertificateDto> parentInfo =
+                familyRelationshipService.getFamilyRelationship(serialNum);
+        modelMap.addAttribute("parentInfo", parentInfo);
 
         return "thymeleaf/birthReport";
 
+    }
+
+    @GetMapping("/death-report/{serialNumber}")
+    public String deathReport(@PathVariable("serialNumber") int serialNum,
+                              ModelMap modelMap){
+        BirthDeathReportResident info =
+                birthDeathReportResidentService.findReport(serialNum, "사망");
+        modelMap.addAttribute("info", info);
+
+        Resident own = residentService.getResident(serialNum);
+        modelMap.addAttribute("own", own);
+
+        RegistrantDto registrant = residentService.findRegistrant(serialNum);
+        modelMap.addAttribute("registrant", registrant);
+
+        return "thymeleaf/deathReport";
     }
 }
