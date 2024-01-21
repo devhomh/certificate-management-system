@@ -5,8 +5,8 @@ import com.nhnacademy.springjpa.entity.Resident;
 import com.nhnacademy.springjpa.repository.CertificateIssueRepository;
 import java.time.LocalDate;
 import java.util.Random;
-import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service("certificateIssueService")
 public class CertificateIssueServiceImpl implements CertificateIssueService{

@@ -3,15 +3,25 @@ package com.nhnacademy.springjpa.service;
 import com.nhnacademy.springjpa.domain.HouseholdCompositionResidentDto;
 import com.nhnacademy.springjpa.domain.RegistrantDto;
 import com.nhnacademy.springjpa.domain.ResidentDto;
+import com.nhnacademy.springjpa.entity.BirthDeathReportResident;
+import com.nhnacademy.springjpa.entity.CertificateIssue;
+import com.nhnacademy.springjpa.entity.FamilyRelationship;
+import com.nhnacademy.springjpa.entity.Household;
 import com.nhnacademy.springjpa.entity.Resident;
+import com.nhnacademy.springjpa.exception.CannotDeleteResidentException;
 import com.nhnacademy.springjpa.exception.ResidentNotFoundException;
+import com.nhnacademy.springjpa.repository.BirthDeathReportResidentRepository;
+import com.nhnacademy.springjpa.repository.CertificateIssueRepository;
+import com.nhnacademy.springjpa.repository.FamilyRelationshipRepository;
 import com.nhnacademy.springjpa.repository.HouseholdCompositionResidentRepository;
+import com.nhnacademy.springjpa.repository.HouseholdRepository;
 import com.nhnacademy.springjpa.repository.ResidentRepository;
 import java.util.List;
-import javax.transaction.Transactional;
+import java.util.Objects;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service("residentService")
 public class ResidentServiceImpl implements ResidentService{
@@ -19,10 +29,27 @@ public class ResidentServiceImpl implements ResidentService{
 
     private final HouseholdCompositionResidentRepository householdCompositionResidentRepository;
 
+    private final CertificateIssueRepository certificateIssueRepository;
+
+    private final HouseholdRepository householdRepository;
+
+    private final FamilyRelationshipRepository familyRelationshipRepository;
+
+    private final BirthDeathReportResidentRepository birthDeathReportResidentRepository;
+
     public ResidentServiceImpl(ResidentRepository residentRepository,
-                               HouseholdCompositionResidentRepository householdCompositionResidentRepository) {
+                               HouseholdCompositionResidentRepository householdCompositionResidentRepository,
+                               CertificateIssueRepository certificateIssueRepository,
+                               HouseholdRepository householdRepository,
+                               FamilyRelationshipRepository familyRelationshipRepository,
+                               BirthDeathReportResidentRepository birthDeathReportResidentRepository) {
+
         this.residentRepository = residentRepository;
         this.householdCompositionResidentRepository = householdCompositionResidentRepository;
+        this.certificateIssueRepository = certificateIssueRepository;
+        this.householdRepository = householdRepository;
+        this.familyRelationshipRepository = familyRelationshipRepository;
+        this.birthDeathReportResidentRepository = birthDeathReportResidentRepository;
     }
 
     @Transactional
@@ -73,5 +100,36 @@ public class ResidentServiceImpl implements ResidentService{
     @Override
     public RegistrantDto findRegistrant(int serialNum) {
         return residentRepository.findRegistrant(serialNum);
+    }
+
+    @Transactional
+    @Override
+    public void deleteResident(int serialNum) {
+        List<CertificateIssue> certificateIssueList = certificateIssueRepository.findByResident_residentSerialNumber(serialNum);
+        if(Objects.nonNull(certificateIssueList) && !certificateIssueList.isEmpty()){
+        certificateIssueRepository.deleteAll(certificateIssueList);
+        }
+
+        Household household = householdRepository.findByResident_ResidentSerialNumber(serialNum);
+        if(Objects.nonNull(household)){
+            if(Objects.equals(household.getHouseholdCompositionReasonCode(), "세대분리")) {
+                throw new CannotDeleteResidentException();
+            }
+            householdRepository.delete(household);
+        }
+
+        List<FamilyRelationship> familyRelationshipList = familyRelationshipRepository
+                .findByPk_FamilyResidentSerialNumber(serialNum);
+        if(Objects.nonNull(familyRelationshipList) && !familyRelationshipList.isEmpty()){
+            familyRelationshipRepository.deleteAll(familyRelationshipList);
+        }
+
+        List<BirthDeathReportResident> birthDeathReportResidentList = birthDeathReportResidentRepository
+                .findByResident_ResidentSerialNumber(serialNum);
+        if(Objects.nonNull(birthDeathReportResidentList) && !birthDeathReportResidentList.isEmpty()){
+            birthDeathReportResidentRepository.deleteAll(birthDeathReportResidentList);
+        }
+
+        residentRepository.deleteById(serialNum);
     }
 }

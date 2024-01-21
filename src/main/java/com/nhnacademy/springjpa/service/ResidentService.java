@@ -16,4 +16,6 @@ public interface ResidentService {
     HouseholdCompositionResidentDto getHeadOfHousehold(int serialNum);
 
     RegistrantDto findRegistrant(int serialNum);
+
+    void deleteResident(int serialNum);
 }

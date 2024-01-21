@@ -6,8 +6,8 @@ import com.nhnacademy.springjpa.repository.HouseholdMovementAddressRepository;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service("householdMovementService")
 public class HouseholdMovementAddressServiceImpl
