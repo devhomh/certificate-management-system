@@ -23,24 +23,3 @@ Content-Type: application/json
 "birthPlaceCode": "수정된병원",
 "registrationBaseAddress": "광주광역시"
 }
-
-###
-POST http://localhost:8080/residents/8/relationship
-Content-Type: application/json
-
-{
-  "familySerialNumber" : 6,
-  "relationship" : "spouse"
-}
-
-###
-PUT http://localhost:8080/residents/8/relationship/6
-Content-Type: application/json
-
-{
-  "relationship": "mother"
-}
-
-###
-DELETE http://localhost:8080/residents/8/relationship/6
-Content-Type: application/json
