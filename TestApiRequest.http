@@ -1,0 +1,25 @@
+POST http://localhost:8080/residents
+Content-Type: application/json
+
+{
+  "residentSerialNumber": 8,
+  "name": "이진우",
+  "residentRegistrationNumber": "940116-1234567",
+  "genderCode": "남",
+  "birthDate": "1994-01-16T00:00:00",
+  "birthPlaceCode": "병원",
+  "registrationBaseAddress": "광주광역시"
+}
+
+###
+PUT http://localhost:8080/residents/8
+Content-Type: application/json
+
+{
+"name": "이진우",
+"residentRegistrationNumber": "940116-1234567",
+"genderCode": "남",
+"birthDate": "1994-01-16T00:00:00",
+"birthPlaceCode": "수정된병원",
+"registrationBaseAddress": "광주광역시"
+}

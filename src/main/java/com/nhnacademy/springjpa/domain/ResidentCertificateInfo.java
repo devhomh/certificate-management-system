@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Data
-public class CreatableCertificate {
+public class ResidentCertificateInfo {
     String name;
     int residentSerialNumber;
     boolean residentRegister;

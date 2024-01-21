@@ -3,12 +3,15 @@ package com.nhnacademy.springjpa.service;
 import com.nhnacademy.springjpa.domain.HouseholdCompositionResidentDto;
 import com.nhnacademy.springjpa.domain.RegistrantDto;
 import com.nhnacademy.springjpa.domain.ResidentDto;
+import com.nhnacademy.springjpa.domain.ResidentModifyRequest;
+import com.nhnacademy.springjpa.domain.ResidentRegisterRequest;
 import com.nhnacademy.springjpa.entity.BirthDeathReportResident;
 import com.nhnacademy.springjpa.entity.CertificateIssue;
 import com.nhnacademy.springjpa.entity.FamilyRelationship;
 import com.nhnacademy.springjpa.entity.Household;
 import com.nhnacademy.springjpa.entity.Resident;
 import com.nhnacademy.springjpa.exception.CannotDeleteResidentException;
+import com.nhnacademy.springjpa.exception.ResidentAlreadyExistsException;
 import com.nhnacademy.springjpa.exception.ResidentNotFoundException;
 import com.nhnacademy.springjpa.repository.BirthDeathReportResidentRepository;
 import com.nhnacademy.springjpa.repository.CertificateIssueRepository;
@@ -131,5 +134,48 @@ public class ResidentServiceImpl implements ResidentService{
         }
 
         residentRepository.deleteById(serialNum);
+    }
+
+    @Transactional
+    @Override
+    public Resident registerResident(ResidentRegisterRequest resident) {
+        int residentId = resident.getResidentSerialNumber();
+        if(residentRepository.existsById(residentId)){
+            throw new ResidentAlreadyExistsException();
+        }
+
+        Resident newResident = new Resident();
+        newResident.setResidentSerialNumber(resident.getResidentSerialNumber());
+        newResident.setName(resident.getName());
+        newResident.setResidentRegistrationNumber(resident.getResidentRegistrationNumber());
+        newResident.setGenderCode(resident.getGenderCode());
+        newResident.setBirthDate(resident.getBirthDate());
+        newResident.setBirthPlaceCode(resident.getBirthPlaceCode());
+        newResident.setRegistrationBaseAddress(resident.getRegistrationBaseAddress());
+        newResident.setDeathDate(resident.getDeathDate());
+        newResident.setDeathPlaceCode(resident.getDeathPlaceCode());
+        newResident.setDeathPlaceAddress(resident.getDeathPlaceAddress());
+
+        residentRepository.save(newResident);
+
+        return newResident;
+    }
+
+    @Override
+    public void modifyResident(int serialNum, ResidentModifyRequest resident) {
+        Resident modifiedResident = residentRepository.findById(serialNum)
+                .orElseThrow(ResidentNotFoundException::new);
+
+        modifiedResident.setName(resident.getName());
+        modifiedResident.setResidentRegistrationNumber(resident.getResidentRegistrationNumber());
+        modifiedResident.setGenderCode(resident.getGenderCode());
+        modifiedResident.setBirthDate(resident.getBirthDate());
+        modifiedResident.setBirthPlaceCode(resident.getBirthPlaceCode());
+        modifiedResident.setRegistrationBaseAddress(resident.getRegistrationBaseAddress());
+        modifiedResident.setDeathDate(resident.getDeathDate());
+        modifiedResident.setDeathPlaceCode(resident.getDeathPlaceCode());
+        modifiedResident.setDeathPlaceAddress(resident.getDeathPlaceAddress());
+
+        residentRepository.save(modifiedResident);
     }
 }

@@ -1,6 +1,6 @@
 package com.nhnacademy.springjpa.controller;
 
-import com.nhnacademy.springjpa.domain.CreatableCertificate;
+import com.nhnacademy.springjpa.domain.ResidentCertificateInfo;
 import com.nhnacademy.springjpa.domain.FamilyRelationshipCertificateDto;
 import com.nhnacademy.springjpa.domain.ResidentDto;
 import com.nhnacademy.springjpa.service.BirthDeathReportResidentService;
@@ -39,33 +39,33 @@ public class HomeController {
     public String home(@PageableDefault(size = 3) Pageable pageable, ModelMap modelMap){
         Page<ResidentDto> pageResult = residentService.getAllBy(pageable);
         List<ResidentDto> residentDtoList = pageResult.getContent();
-        List<CreatableCertificate> residentList = new ArrayList<>();
+        List<ResidentCertificateInfo> residentList = new ArrayList<>();
         for (ResidentDto dto : residentDtoList) {
-            CreatableCertificate creatableCertificate = new CreatableCertificate();
-            creatableCertificate.setName(dto.getName());
+            ResidentCertificateInfo residentCertificateInfo = new ResidentCertificateInfo();
+            residentCertificateInfo.setName(dto.getName());
 
             int serialNum = dto.getResidentSerialNumber();
-            creatableCertificate.setResidentSerialNumber(serialNum);
+            residentCertificateInfo.setResidentSerialNumber(serialNum);
 
-            creatableCertificate.setResidentRegister(
+            residentCertificateInfo.setResidentRegister(
                     Objects.nonNull(householdCompositionResidentService.getHouseholdCompositionResident(serialNum))
             );
 
             List<FamilyRelationshipCertificateDto> familyRelationshipList
                     = familyRelationshipService.getFamilyRelationship(serialNum);
-            creatableCertificate.setFamilyRelationship(
+            residentCertificateInfo.setFamilyRelationship(
                     Objects.nonNull(familyRelationshipList) && !familyRelationshipList.isEmpty()
             );
 
-            creatableCertificate.setBirthReport(
+            residentCertificateInfo.setBirthReport(
                     Objects.nonNull(birthDeathReportResidentService.findReport(serialNum, "출생"))
             );
 
-            creatableCertificate.setDeathReport(
+            residentCertificateInfo.setDeathReport(
                     Objects.nonNull(birthDeathReportResidentService.findReport(serialNum, "사망"))
             );
 
-            residentList.add(creatableCertificate);
+            residentList.add(residentCertificateInfo);
         }
 
 
