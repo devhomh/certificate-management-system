@@ -15,7 +15,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@NoArgsConstructor
 @Getter @Setter
 @Entity
 @Table(name = "family_relationship")
@@ -30,6 +29,10 @@ public class FamilyRelationship {
 
     @Column(name = "family_relationship_code")
     private String familyRelationshipCode;
+
+    public FamilyRelationship(){
+        this.pk = new Pk();
+    }
 
     @NoArgsConstructor
     @AllArgsConstructor

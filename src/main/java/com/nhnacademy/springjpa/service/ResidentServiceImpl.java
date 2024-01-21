@@ -161,6 +161,7 @@ public class ResidentServiceImpl implements ResidentService{
         return newResident;
     }
 
+    @Transactional
     @Override
     public void modifyResident(int serialNum, ResidentModifyRequest resident) {
         Resident modifiedResident = residentRepository.findById(serialNum)
